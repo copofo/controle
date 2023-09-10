@@ -1,7 +1,7 @@
 const l = (tag) => document.getElementById(tag)
 
 const f = {
-    
+
     email: () => l('email'),
     password: () => l("password"),
     btnRec: () => l('btnRec'),
@@ -52,3 +52,4 @@ function validateEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
 }
 
+//parei na aula 5

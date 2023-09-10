@@ -9,4 +9,5 @@ const firebaseConfig = {
   };
 
 
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig)
+
