@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+
+    <form>
+
+        <div>
+            <div><label for="email">Email</label></div>
+            <input type="email" name="email" id="email" placeholder="seu@email.com">
+        </div>
+
+        <div>
+            <div><label for="password" for="password">Senha</label></div>
+            <input type="password" name="password" id="password" placeholder="Senha">
+        </div>
+
+        <div><input type="button" value="Recuperar senha" id="btnRecSenha"></div>
+
+        <div><input type="button" value="Entrar" id="btnLogin"></div>
+
+        <div><input type="button" value="Registrar" id="btnRegis"></div>
+    </form>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+
+    <script src="js/init.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
