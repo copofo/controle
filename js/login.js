@@ -8,7 +8,8 @@ const f = {
     btnLogin: () => l('btnLogin'),
     imailObg: () => l("imailObg"),
     emailInvalid: ()=> l("emailInvalid"),
-    passObg: ()=> l('passObg')
+    passObg: ()=> l('passObg'),
+    btnRegis: ()=> l('btnRegis')
 
 }
 
@@ -17,6 +18,8 @@ const f = {
 
 f.email().addEventListener('change', onChangeEmail)
 f.password().addEventListener('change', onChangePassword)
+f.btnLogin().addEventListener("click", login)
+f.btnRegis().addEventListener('click', register)
 
 function onChangeEmail() {
     toggleButtonDisabled()
@@ -27,6 +30,14 @@ function onChangeEmail() {
 function onChangePassword(){
     toggleButtonDisabled()
     togglePasswordErrors()
+}
+
+function login(){
+    window.location.href = 'pg/home.html'
+}
+
+function register(){
+    window.location.href = 'pg/register.html'
 }
 
 function isEmailValid() {
