@@ -1,20 +1,23 @@
+const l = (tag) => document.getElementById(tag)
+
 const f = {
-    email: () => document.getElementById('email'),
-    password: () => document.getElementById("password"),
-    btnRec: () => document.getElementById('btnRec'),
-    btnLogin: () => document.getElementById('btnLogin')
+    
+    email: () => l('email'),
+    password: () => l("password"),
+    btnRec: () => l('btnRec'),
+    btnLogin: () => l('btnLogin'),
+    imailObg: () => l("imailObg")
 
 }
+
+
 
 f.email().addEventListener('change', validateFields)
 f.password().addEventListener('change', validateFields)
 
 function validateFields() {
-    const emailValid = isEmailValid()
-    f.btnRec().disabled = !emailValid;
-
-    const passwordValid = isPasswordValid()
-    f.btnLogin().disabled = !emailValid || !passwordValid
+    toggleButtonDisabled()
+    toggleEmailErrors()
 }
 
 function isEmailValid() {
@@ -25,6 +28,17 @@ function isEmailValid() {
     return validateEmail(email)
 }
 
+function toggleButtonDisabled(){
+    const emailValid = isEmailValid()
+    f.btnRec().disabled = !emailValid;
+
+    const passwordValid = isPasswordValid()
+    f.btnLogin().disabled = !emailValid || !passwordValid
+}
+
+function toggleEmailErrors(){
+
+}
 
 function isPasswordValid(){
     const password = f.password().value
@@ -38,4 +52,3 @@ function validateEmail(email) {
     return /\S+@\S+\.\S+/.test(email)
 }
 
-//teste
