@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="style/global.css">
 </head>
 <body>
 
@@ -19,11 +20,17 @@
             <input type="password" name="password" id="password" placeholder="Senha">
         </div>
 
-        <div><input type="button" value="Recuperar senha" id="btnRecSenha"></div>
+        <div>
+            <button type="button" id="btnRec" class="clear" disabled="true">Recuperar senha</button>
+        </div>
 
-        <div><input type="button" value="Entrar" id="btnLogin"></div>
+        <div>
+            <button type="button" id="btnLogin" class="solid" disabled="true">Entrar</button>
+        </div>
 
-        <div><input type="button" value="Registrar" id="btnRegis"></div>
+        <div>
+            <button type="button" id="btnRegis" class="outline">Registrar</button>
+        </div>
     </form>
 
 
