@@ -2,22 +2,31 @@ const l = (tag) => document.getElementById(tag)
 
 const f = {
 
-    email: () => l('email'),
+    email: () => l("email"),
     password: () => l("password"),
     btnRec: () => l('btnRec'),
     btnLogin: () => l('btnLogin'),
-    imailObg: () => l("imailObg")
+    imailObg: () => l("imailObg"),
+    emailInvalid: ()=> l("emailInvalid"),
+    passObg: ()=> l('passObg')
 
 }
 
 
 
-f.email().addEventListener('change', validateFields)
-f.password().addEventListener('change', validateFields)
 
-function validateFields() {
+f.email().addEventListener('change', onChangeEmail)
+f.password().addEventListener('change', onChangePassword)
+
+function onChangeEmail() {
     toggleButtonDisabled()
     toggleEmailErrors()
+    
+}
+
+function onChangePassword(){
+    toggleButtonDisabled()
+    togglePasswordErrors()
 }
 
 function isEmailValid() {
@@ -37,7 +46,16 @@ function toggleButtonDisabled(){
 }
 
 function toggleEmailErrors(){
+    const email = f.email().value
+    f.imailObg().style.display = email ? 'none' : 'block'
 
+    f.emailInvalid().style.display = validateEmail(email) ? "none" : "block"
+}
+
+function togglePasswordErrors(){
+    const password = f.password().value
+
+    f.passObg().style.display = password ? 'none' : "block"
 }
 
 function isPasswordValid(){
@@ -48,8 +66,6 @@ function isPasswordValid(){
     return true
 }
 
-function validateEmail(email) {
-    return /\S+@\S+\.\S+/.test(email)
-}
+
 
 //parei na aula 5
