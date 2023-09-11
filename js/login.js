@@ -13,6 +13,21 @@ const f = {
 
 }
 
+window.addEventListener('keydown',(e) =>{
+  let key = e.keyCode
+  f.password().addEventListener('keyup',()=>{
+      if(f.email().value && f.password().value){
+        ley str = []
+        for(let c in str){
+        f.btnLogin().style.display = "block"
+      }
+      if(key == "13" || key == "Enter"){
+    f.btnLogin().click()
+  }
+    })
+  
+})
+
 
 
 
@@ -33,7 +48,25 @@ function onChangePassword(){
 }
 
 function login(){
-    window.location.href = 'pg/home.html'
+    firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
+    .then(res =>{
+      window.location.href = 'pg/home.html'
+    })
+    .catch(erro =>{
+      alert(getMessageError(erro))
+      console.log(getMessageError(erro))
+    })
+}
+
+function getMessageError(erro){
+  if(erro.code == "auth/user-not-found"){
+    return 'Usuário não encontrado!'
+  }
+  
+  if(erro.code == "auth/wrong-password"){
+    return "A senha está incorreta, você tem mais 2 tentativas antes do bloqueio temporário da sua conta!"
+  }
+  return erro.message
 }
 
 function register(){
