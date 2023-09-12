@@ -99,7 +99,9 @@ function getMessageError(erro) {
 }
 
 function register() {
-  window.location.href = 'pg/register.html'
+  setTimeout(() => {
+    window.location.href = 'pg/register.html'
+  }, 3000);
 }
 
 function recoverPassword(){
