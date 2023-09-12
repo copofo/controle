@@ -2,32 +2,48 @@ const l = (tag) => document.getElementById(tag)
 
 const f = {
 
-    email: () => l("email"),
-    password: () => l("password"),
-    btnRec: () => l('btnRec'),
-    btnLogin: () => l('btnLogin'),
-    imailObg: () => l("imailObg"),
-    emailInvalid: ()=> l("emailInvalid"),
-    passObg: ()=> l('passObg'),
-    btnRegis: ()=> l('btnRegis')
+  email: () => l("email"),
+  password: () => l("password"),
+  btnRec: () => l('btnRec'),
+  btnLogin: () => l('btnLogin'),
+  imailObg: () => l("imailObg"),
+  emailInvalid: () => l("emailInvalid"),
+  passObg: () => l('passObg'),
+  btnRegis: () => l('btnRegis')
 
 }
 
-window.addEventListener('keydown',(e) =>{
+window.addEventListener('keydown', (e) => {
   let key = e.keyCode
-  f.password().addEventListener('keyup',()=>{
-      if(f.email().value && f.password().value){
-        ley str = []
-        for(let c in str){
-        f.btnLogin().style.display = "block"
-      }
-      if(key == "13" || key == "Enter"){
+  if (key == "13" || e.key == "Enter") {
     f.btnLogin().click()
   }
-    })
-  
+
+
 })
 
+let str = []
+
+
+f.password().addEventListener('input', (e) => {
+
+  str.push(e.data)
+
+  if (e.data == null) {
+    str.pop()
+  }
+
+  if (e.inputType === 'deleteContentBackward') {
+    str.splice(-2, 1)
+  }
+
+  if (str.length < 6) {
+    f.btnLogin().disabled = true
+  } else {
+    f.btnLogin().disabled = false
+  }
+
+})
 
 
 
@@ -37,79 +53,82 @@ f.btnLogin().addEventListener("click", login)
 f.btnRegis().addEventListener('click', register)
 
 function onChangeEmail() {
-    toggleButtonDisabled()
-    toggleEmailErrors()
-    
+  toggleButtonDisabled()
+  toggleEmailErrors()
+
 }
 
-function onChangePassword(){
-    toggleButtonDisabled()
-    togglePasswordErrors()
+function onChangePassword() {
+  toggleButtonDisabled()
+  togglePasswordErrors()
+
 }
 
-function login(){
-    firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
-    .then(res =>{
+function login() {
+  showLoading()
+  firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
+    .then(res => {
+      hideLoading()
       window.location.href = 'pg/home.html'
     })
-    .catch(erro =>{
+    .catch(erro => {
+      hideLoading()
       alert(getMessageError(erro))
       console.log(getMessageError(erro))
     })
 }
 
-function getMessageError(erro){
-  if(erro.code == "auth/user-not-found"){
+function getMessageError(erro) {
+  if (erro.code == "auth/user-not-found") {
     return 'Usuário não encontrado!'
   }
-  
-  if(erro.code == "auth/wrong-password"){
+
+  if (erro.code == "auth/wrong-password") {
     return "A senha está incorreta, você tem mais 2 tentativas antes do bloqueio temporário da sua conta!"
   }
   return erro.message
 }
 
-function register(){
-    window.location.href = 'pg/register.html'
+function register() {
+  window.location.href = 'pg/register.html'
 }
 
 function isEmailValid() {
-    const email = f.email().value
-    if (!email) {
-        return false
-    }
-    return validateEmail(email)
+  const email = f.email().value
+  if (!email) {
+    return false
+  }
+  return validateEmail(email)
 }
 
-function toggleButtonDisabled(){
-    const emailValid = isEmailValid()
-    f.btnRec().disabled = !emailValid;
+function toggleButtonDisabled() {
+  const emailValid = isEmailValid()
+  f.btnRec().disabled = !emailValid;
 
-    const passwordValid = isPasswordValid()
-    f.btnLogin().disabled = !emailValid || !passwordValid
+  const passwordValid = isPasswordValid()
+  f.btnLogin().disabled = !emailValid || !passwordValid
 }
 
-function toggleEmailErrors(){
-    const email = f.email().value
-    f.imailObg().style.display = email ? 'none' : 'block'
+function toggleEmailErrors() {
+  const email = f.email().value
+  f.imailObg().style.display = email ? 'none' : 'block'
 
-    f.emailInvalid().style.display = validateEmail(email) ? "none" : "block"
+  f.emailInvalid().style.display = validateEmail(email) ? "none" : "block"
 }
 
-function togglePasswordErrors(){
-    const password = f.password().value
+function togglePasswordErrors() {
+  const password = f.password().value
 
-    f.passObg().style.display = password ? 'none' : "block"
+  f.passObg().style.display = password ? 'none' : "block"
 }
 
-function isPasswordValid(){
-    const password = f.password().value
-    if(!password){
-        return false
-    }
-    return true
+function isPasswordValid() {
+  const password = f.password().value
+  if (!password) {
+    return false
+  }
+  return true
 }
-
 
 
 //parei na aula 9
