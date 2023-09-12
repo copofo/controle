@@ -68,15 +68,21 @@ function login() {
   showLoading()
   firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
     .then(res => {
-      hideLoading()
-      window.location.href = 'pg/home.html'
+      setTimeout(()=>{
+        hideLoading()
+        window.location.href = 'pg/home.html'
+      },3000)
+      
     })
     .catch(erro => {
-      hideLoading()
+      setTimeout(()=>{
+        hideLoading()
       // alert(getMessageError(erro))
       f.imailObg().innerHTML = getMessageError(erro)
       f.imailObg().style.display = 'block'
       console.log(getMessageError(erro))
+      },3000)
+      
     })
 }
 
