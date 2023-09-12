@@ -99,7 +99,9 @@ function getMessageError(erro) {
 }
 
 function register() {
+  showLoading()
   setTimeout(() => {
+    hideLoading()
     window.location.href = 'pg/register.html'
   }, 3000);
 }
