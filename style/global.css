@@ -15,9 +15,6 @@ body{
     height: 100%;
 }
 
-.loading label{
-    font-size: 24px;
-}
 
 .clear{
     background-color: transparent;
@@ -50,4 +47,27 @@ button[disabled]{
     color: white;
     background-color: red;
     display: none;
+}
+
+.loadingAnimation{
+    width: 60px;
+    height: 60px;
+    display: block;
+    position: fixed;
+    background-color: transparent;
+    border: 12px solid green;
+    border-radius: 50%;
+    border-top: 12px solid transparent;
+
+    animation: anima 1s linear infinite;
+}
+
+@keyframes anima{
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
 }

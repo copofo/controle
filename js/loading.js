@@ -7,9 +7,13 @@ function showLoading() {
     div.classList.add("loading", "centralize")
     document.body.appendChild(div)
 
-    const label = c('label')
-    label.innerHTML = "Carregando..."
-    div.appendChild(label)
+    const span = c('span')
+    span.classList.add('loadingAnimation')
+    div.appendChild(span)
+    
+    // const label = c('label')
+    // label.innerHTML = "Carregando..."
+    // div.appendChild(label)
     
 }
 
