@@ -73,7 +73,9 @@ function login() {
     })
     .catch(erro => {
       hideLoading()
-      alert(getMessageError(erro))
+      // alert(getMessageError(erro))
+      f.imailObg().innerHTML = getMessageError(erro)
+      f.imailObg().style.display = 'block'
       console.log(getMessageError(erro))
     })
 }
