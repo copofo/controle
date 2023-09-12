@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/register.css">
 </head>
-<body>
-    Register
+<body class="centralize">
+    <form>
+
+        <div class="formField">
+            <div><label for="email">Email</label></div>
+            <input type="email" id="email" placeholder="seu@email.com">
+        </div>
+
+        <div class="formField">
+            <div><label for="password"Senha>Senha</label></div>
+            <input type="password" id="password" placeholder="Senha">
+        </div>
+
+        <div class="formField">
+            <div><label for="confirmPassword">Confirmar Senha</label></div>
+            <input type="password" id="confirmPassword" placeholder="Confirmar senha">
+        </div>
+
+        <div>
+            <button type="button" class="solid">Registrar</button>
+        </div>
+
+        <div>
+            <button type="button" class="clear">Login</button>
+        </div>
+    </form>
 </body>
 </html>
