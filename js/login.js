@@ -51,6 +51,8 @@ f.email().addEventListener('change', onChangeEmail)
 f.password().addEventListener('change', onChangePassword)
 f.btnLogin().addEventListener("click", login)
 f.btnRegis().addEventListener('click', register)
+f.btnRec().addEventListener('click', recoverPassword)
+
 
 function onChangeEmail() {
   toggleButtonDisabled()
@@ -77,7 +79,6 @@ function login() {
     .catch(erro => {
       setTimeout(()=>{
         hideLoading()
-      // alert(getMessageError(erro))
       f.imailObg().innerHTML = getMessageError(erro)
       f.imailObg().style.display = 'block'
       console.log(getMessageError(erro))
@@ -99,6 +100,27 @@ function getMessageError(erro) {
 
 function register() {
   window.location.href = 'pg/register.html'
+}
+
+function recoverPassword(){
+  showLoading()
+  firebase.auth().sendPasswordResetEmail(f.email().value)
+  .then(res =>{
+      setTimeout(() => {
+        hideLoading()
+        f.imailObg().innerHTML = 'Email enviado com sucesso.'
+        f.imailObg().style.color = 'blue'
+        f.imailObg().style.background= 'skyblue'
+        f.imailObg().style.display = 'block'
+      }, 3000);
+  })
+  .catch(erro =>{
+    setTimeout(() => {
+      hideLoading()
+      f.imailObg().innerHTML = getMessageError(erro)
+      f.imailObg().style.display = 'block'
+    }, 3000);
+  })
 }
 
 function isEmailValid() {

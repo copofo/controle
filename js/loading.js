@@ -11,10 +11,6 @@ function showLoading() {
     span.classList.add('loadingAnimation')
     div.appendChild(span)
     
-    // const label = c('label')
-    // label.innerHTML = "Carregando..."
-    // div.appendChild(label)
-    
 }
 
 function hideLoading() {
