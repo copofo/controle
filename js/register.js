@@ -15,7 +15,7 @@ const f = {
 f.email().addEventListener("change", onChangeEmail)
 f.password().addEventListener("change", onChangePassword)
 f.confirmPassword().addEventListener('change', onChangeConfirmPassword)
-
+f.btnRegister().addEventListener('click', register)
 
 function onChangeEmail() {
     const email = f.email().value
@@ -43,6 +43,18 @@ function onChangePassword() {
 
     validatePasswordMacth()
     toggleResgisterButtonDisable()
+}
+
+function register(){
+    showLoading()
+    // firebase.auth().createUserWithEmailAndPassword(f.email().value, f.password().value)
+    // .then(res =>{
+
+    // })
+
+    setTimeout(()=>{    
+        hideLoading()
+    },3000)
 }
 
 function toggleResgisterButtonDisable(){
