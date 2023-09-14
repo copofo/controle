@@ -1,67 +1,72 @@
-body{
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #2dd36f;
+
+
+
 }
 
-.centralize{
+.centralize {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.formField{
+.formField {
     margin-bottom: 10px;
 }
 
-input,button{
+input,
+button {
     padding: 10px;
     width: -webkit-fill-available;
 }
 
 
-.loading{
-    background-color: rgba(0,0,0,0.5);
+.loading {
+    background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     width: 100vw;
     height: 100vh;
 }
 
 
-.clear{
+.clear {
     background-color: transparent;
     border: none;
     color: white;
 }
 
-.solid{
+.solid {
     background-color: white;
     border: none;
-    color: rgb(45,211,111);
+    color: rgb(45, 211, 111);
 }
 
-.outline{
+.outline {
     background-color: transparent;
     color: white;
     border: 1px solid white;
 }
 
-button:active{
+button:active {
     opacity: 0.8;
 }
 
-button[disabled]{
+button[disabled] {
     opacity: 0.7;
 }
 
 
-.error{
+.error {
     color: white;
     background-color: red;
     display: none;
 }
 
-.loadingAnimation{
+.loadingAnimation {
     width: 60px;
     height: 60px;
     display: block;
@@ -74,12 +79,12 @@ button[disabled]{
     animation: anima 1s linear infinite;
 }
 
-@keyframes anima{
-    0%{
+@keyframes anima {
+    0% {
         transform: rotate(0deg);
     }
 
-    100%{
+    100% {
         transform: rotate(360deg);
     }
 }
