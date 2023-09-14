@@ -13,6 +13,8 @@ const f = {
 
 }
 
+var currentUser
+
 window.addEventListener('keydown', (e) => {
   let key = e.keyCode
   if (key == "13" || e.key == "Enter") {
@@ -70,10 +72,16 @@ function login() {
   showLoading()
   firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
     .then(res => {
-      setTimeout(()=>{
-        hideLoading()
-        window.location.href = 'pg/home.html'
-      },3000)
+      firebase.auth().onAuthStateChanged((user)=>{
+                
+        currentUser = user
+        if(user.emailVerified){
+          window.location.href = "pg/home.html"
+        } else{
+          hideLoading()
+          alert('Email não Verificado!')
+        }
+      })
       
     })
     .catch(erro => {
@@ -85,10 +93,12 @@ function login() {
       },3000)
       
     })
+
+    
 }
 
 function getMessageError(erro) {
-  if (erro.code == "auth/user-not-found") {
+  if (erro.code == "auth/user-not-found" || erro.code == 'auth/invalid-login-credentials') {
     return 'Usuário não encontrado!'
   }
 
@@ -165,4 +175,4 @@ function isPasswordValid() {
 }
 
 
-//parei na aula 14
+//parei na aula 15

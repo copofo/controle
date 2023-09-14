@@ -1,12 +1,12 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyAQHTo14OgEr8q56qLsIZC85CXIjcatYbM",
-    authDomain: "trio-ribeirao.firebaseapp.com",
-    projectId: "trio-ribeirao",
-    storageBucket: "trio-ribeirao.appspot.com",
-    messagingSenderId: "283549252712",
-    appId: "1:283549252712:web:6c73797dc8fa9320ef8fdd",
-    measurementId: "G-EBLKLCM893"
-  };
+  apiKey: "AIzaSyDLxR6JDQg0eyWu1iAGZpokXWgK070z_Ik",
+  authDomain: "controle-de-gastos-tellesjr.firebaseapp.com",
+  projectId: "controle-de-gastos-tellesjr",
+  storageBucket: "controle-de-gastos-tellesjr.appspot.com",
+  messagingSenderId: "447408137717",
+  appId: "1:447408137717:web:e822fa523349b980faecbc",
+  measurementId: "G-41XG9DKQG2"
+};
 
 
   firebase.initializeApp(firebaseConfig)
