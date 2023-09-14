@@ -13,6 +13,24 @@ const f = {
 
 }
 
+window.addEventListener("DOMContentLoaded", ()=>{
+  showLoading()
+
+  
+    firebase.auth().onAuthStateChanged((user)=>{
+      
+      if(user){
+        hideLoading()
+        window.location.href = 'pg/home.html'
+      }else{
+        hideLoading()
+      }
+    })
+
+})
+
+
+
 var currentUser
 
 window.addEventListener('keydown', (e) => {
@@ -175,4 +193,4 @@ function isPasswordValid() {
 }
 
 
-//parei na aula 15
+//parei na aula 16
