@@ -13,25 +13,36 @@
         <div class="formField">
             <div><label for="email">Email</label></div>
             <input type="email" id="email" placeholder="seu@email.com">
+
+            <div id="emailObg" class="error">Email é obrigatório!</div>
+            <div id="emailInvalid" class="error">Email é invalido!</div>
         </div>
 
         <div class="formField">
             <div><label for="password"Senha>Senha</label></div>
             <input type="password" id="password" placeholder="Senha">
+
+            <div id="passwordObg" class="error">Senha é obrigatório!</div>
+            <div id="passwordMinLength" class="error">A senha deve ter pelo menos 6 caracteres!</div>
         </div>
 
         <div class="formField">
             <div><label for="confirmPassword">Confirmar Senha</label></div>
             <input type="password" id="confirmPassword" placeholder="Confirmar senha">
+
+            <div id="passwordMatchError" class="error">Senhas divergentes!</div>
         </div>
 
         <div>
-            <button type="button" class="solid">Registrar</button>
+            <button type="button" class="solid" disabled="true" id="btnRegister">Registrar</button>
         </div>
 
         <div>
             <button type="button" class="clear">Login</button>
         </div>
+
+        <script src="../js/register.js"></script>
+        <script src="../js/validations.js"></script>
     </form>
 </body>
 </html>
