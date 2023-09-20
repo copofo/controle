@@ -13,19 +13,10 @@
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
 
     <script src="../js/init.js"></script>
-
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            firebase.auth().onAuthStateChanged(user => {
-                if (!user) {
-                    window.location.href = '../index.html'
-                }
-            })
-        })
-    </script>
+    <script src="../js/guard.js"></script>
 </head>
 
-<body>
+<body style="display: none;">
     <header>
         <button type="button" class="clear" id="logout">Sair</button>
     </header>

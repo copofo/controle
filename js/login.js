@@ -13,19 +13,19 @@ const f = {
 
 }
 
-window.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("DOMContentLoaded", () => {
   showLoading()
 
-  
-    firebase.auth().onAuthStateChanged((user)=>{
-      
-      if(user){
-        hideLoading()
-        window.location.href = 'pg/home.html'
-      }else{
-        hideLoading()
-      }
-    })
+
+  firebase.auth().onAuthStateChanged((user) => {
+
+    if (user && user.emailVerified) {
+      hideLoading()
+      window.location.href = 'pg/home.html'
+    } else {
+      hideLoading()
+    }
+  })
 
 })
 
@@ -90,29 +90,43 @@ function login() {
   showLoading()
   firebase.auth().signInWithEmailAndPassword(f.email().value, f.password().value)
     .then(res => {
-      firebase.auth().onAuthStateChanged((user)=>{
-                
+      firebase.auth().onAuthStateChanged((user) => {
+
         currentUser = user
-        if(user.emailVerified){
+        if (user.emailVerified) {
           window.location.href = "pg/home.html"
-        } else{
+        } else {
           hideLoading()
-          alert('Email não Verificado!')
+          if (!user.emailVerified) {
+            firebase.auth().signOut()
+              .then(() => {
+                console.log('logout')
+                  .catch(erro => {
+                    console.log(erro.message)
+                  })
+              })
+            alert('Email não Verificado!')
+          }
+
+
         }
+
+
       })
-      
+
     })
     .catch(erro => {
-      setTimeout(()=>{
+      setTimeout(() => {
         hideLoading()
-      f.imailObg().innerHTML = getMessageError(erro)
-      f.imailObg().style.display = 'block'
-      console.log(getMessageError(erro))
-      },3000)
-      
+        f.imailObg().innerHTML = getMessageError(erro)
+        f.imailObg().style.display = 'block'
+        console.log(getMessageError(erro))
+      }, 3000)
+
+
     })
 
-    
+
 }
 
 function getMessageError(erro) {
@@ -134,25 +148,25 @@ function register() {
   }, 3000);
 }
 
-function recoverPassword(){
+function recoverPassword() {
   showLoading()
   firebase.auth().sendPasswordResetEmail(f.email().value)
-  .then(res =>{
+    .then(res => {
       setTimeout(() => {
         hideLoading()
         f.imailObg().innerHTML = 'Email enviado com sucesso.'
         f.imailObg().style.color = 'blue'
-        f.imailObg().style.background= 'skyblue'
+        f.imailObg().style.background = 'skyblue'
         f.imailObg().style.display = 'block'
       }, 3000);
-  })
-  .catch(erro =>{
-    setTimeout(() => {
-      hideLoading()
-      f.imailObg().innerHTML = getMessageError(erro)
-      f.imailObg().style.display = 'block'
-    }, 3000);
-  })
+    })
+    .catch(erro => {
+      setTimeout(() => {
+        hideLoading()
+        f.imailObg().innerHTML = getMessageError(erro)
+        f.imailObg().style.display = 'block'
+      }, 3000);
+    })
 }
 
 function isEmailValid() {

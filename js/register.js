@@ -10,16 +10,26 @@ const f = {
     passwordObg: () => d("passwordObg"),
     passwordMinLength: () => d("passwordMinLength"),
     passwordMatchError: () => d("passwordMatchError"),
-    btnLogin: ()=> d('btnLogin')
+    btnLogin: () => d('btnLogin')
 }
+
+window.addEventListener('keydown', (e) => {
+    let key = e.keyCode
+    if (key == "13" || e.key == "Enter") {
+        f.btnRegister().click()
+    }
+
+
+})
 
 f.email().addEventListener("change", onChangeEmail)
 f.password().addEventListener("change", onChangePassword)
 f.confirmPassword().addEventListener('change', onChangeConfirmPassword)
 f.btnRegister().addEventListener('click', register)
+f.confirmPassword().addEventListener('input', onChangeConfirmPassword)
 
 
-f.btnLogin().addEventListener('click', ()=>{
+f.btnLogin().addEventListener('click', () => {
     window.location.href = '../index.html'
 })
 
@@ -61,48 +71,48 @@ function register() {
         .then(user => {
 
 
-                    firebase.auth().onAuthStateChanged((user) => {
-                        hideLoading()
-                        currentUser = user
-                        firebase.auth().languageCode = "pt"
-                        if (user.emailVerified) {
-                            window.location.href = "../index.html"
-                        } else {
-                            hideLoading()
-
-                            user.sendEmailVerification()
-                                .then(() => {
-                                    alert('Email de Verificação Enviado')
-                                    window.location.href = "../index.html"
-                                })
-                            
-                        }
-
-
-                    })
-
-                })
-
-                .catch(erro => {
+            firebase.auth().onAuthStateChanged((user) => {
+                hideLoading()
+                currentUser = user
+                firebase.auth().languageCode = "pt"
+                if (user.emailVerified) {
+                    window.location.href = "../index.html"
+                } else {
                     hideLoading()
 
-                    alert(getMessageError(erro))
+                    user.sendEmailVerification()
+                        .then(() => {
+                            alert('Email de Verificação Enviado')
+                            window.location.href = "../index.html"
+                        })
+
+                }
+
+
+            })
+
+        })
+
+        .catch(erro => {
+            hideLoading()
+
+            alert(getMessageError(erro))
 
 
 
 
-                })
+        })
 
 
-        
+
 
 
 }
 
 
-function getMessageError(erro){
+function getMessageError(erro) {
 
-    if(erro.code == "auth/email-already-in-use"){
+    if (erro.code == "auth/email-already-in-use") {
 
         return 'O endereço de e-mail já está em uso!'
 
