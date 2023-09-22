@@ -31,7 +31,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-var currentUser
+
+
 
 window.addEventListener('keydown', (e) => {
   let key = e.keyCode
@@ -92,7 +93,7 @@ function login() {
     .then(res => {
       firebase.auth().onAuthStateChanged((user) => {
 
-        currentUser = user
+      
         if (user.emailVerified) {
           window.location.href = "pg/home.html"
         } else {
@@ -207,4 +208,4 @@ function isPasswordValid() {
 }
 
 
-//parei na aula 19
+//parei na aula 20
