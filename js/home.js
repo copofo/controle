@@ -22,10 +22,13 @@ findTransactions()
 
 function findTransactions(){
    
-    setTimeout(()=>{
-      
-        addTransactionToScreen(fakeTransactions)
-    },1000)
+        firebase.firestore()
+            .collection('transactions')
+            .get()
+            .then(snapshot =>{
+                const transaction = snapshot.docs.map(doc => doc.data())
+                addTransactionToScreen(transaction)
+            })
 }
 
 function addTransactionToScreen(transaction){
@@ -66,50 +69,3 @@ function formatDate(date){
 function formatMoney(money){
     return `${money.currency} ${money.value.toFixed(2)}`
 }
-const fakeTransactions = 
-[
-    {
-        type: "expense",
-        date: "2023-09-21",
-        money: {
-            currency: "R$",
-            value: 10
-        },
-        transactionType: "Supermercado"
-    },
-
-    {
-        type: "income",
-        date: "2023-09-19",
-        money: {
-            currency: "R$",
-            value: 5000
-        },
-        transactionType: "Salário",
-        description: "Empresa A"
-    },
-
-    {
-        type: "expense",
-        date: "2023-09-15",
-        money: {
-            currency: "EUR",
-            value: 10
-        },
-        transactionType: "Transporte",
-        description: "Metrô ida e volta"
-    },
-
-    {
-        type: "expense",
-        date: "2023-09-17",
-        money: {
-            currency: "USD",
-            value: 10
-        },
-        transactionType: "Aluguel",
-        description: "Mensalidade"
-    },
-
-    
-]
