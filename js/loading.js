@@ -1,6 +1,6 @@
 const c = (el) => document.createElement(el)
 const g = (tag) => document.querySelector(tag)
-const gall = (tag) => document.querySelectorAll(tag)
+const gAll = (tag) => document.querySelectorAll(tag)
 
 function showLoading() {
     const div = c('div')
@@ -14,7 +14,7 @@ function showLoading() {
 }
 
 function hideLoading() {
-    const loadings = gall('.loading')
+    const loadings = gAll('.loading')
     if(loadings.length){
         loadings[0].remove()
     }
