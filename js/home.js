@@ -1,14 +1,23 @@
 const d = (tag)=> document.getElementById(tag)
 const cr = (tag) => document.createElement(tag)
 const f = {
-    logout: ()=> d('logout')
+    logout: ()=> d('logout'),
+    btnNewTransaction: ()=> d('btnNewTransaction')
 }
+
+
+f.btnNewTransaction().addEventListener('click', newTransaction)
 
 firebase.auth().onAuthStateChanged(user =>{
     if(user){
         findTransactions(user)
     }
 })
+
+
+function newTransaction(){
+    window.location.href = 'transaction.html'
+}
 
 
 f.logout().addEventListener('click', logout)

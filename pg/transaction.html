@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transaction</title>
+    <link rel="stylesheet" href="../style/global.css">
+    <link rel="stylesheet" href="../style/transaction.css">
+
+    
+</head>
+
+<body style="display: none;">
+    <header>
+        <button type="button" class="clear" id="logout">Sair</button>
+    </header>  
+
+    <main class="centralize">
+        <form>
+            <div class="formField">
+                <div><label>Transação</label></div>
+                <input type="radio" name="type" checked id="expense"> <label for="expense">Despesa</label>
+                <input type="radio" name="type" id="income"> <label for="income">Receita</label>
+            </div>
+            <div class="formField">
+                <div><label>Data da Transação</label></div>
+                <input type="date">
+        
+            </div>
+            <div class="formField">
+                <div><label>Moeda</label></div>
+                <select>
+                    <option>Dólar</option>
+                    <option>Euro</option>
+                    <option selected>Real</option>
+                </select>
+            </div>
+            <div class="formField">
+                <div><label>Valor</label></div>
+                <input type="number">
+        
+            </div>
+            <div class="formField">
+                <div><label>Tipo de Transação</label></div>
+                <select>
+                    <option>-- Selecione um tipo de transação --</option>
+                    <option>Acomodação</option>
+                    <option>Transporte</option>
+                    <option>Alimentação</option>
+                    <option>Supermercado</option>
+                    <option>Outtros</option>
+                </select>
+            </div>
+            <div class="formField">
+                <div><label>Descrição</label></div>
+                <input type="text">
+        
+            </div>
+            <button type="button" class="solid">Salvar</button>
+            <button type="button" class="clear">Cancelar</button>
+        </form>
+    </main>
+   
+
+    
+
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
+
+    <script src="../js/init.js"></script>
+    <script src="../js/guard.js"></script>
+
+
+    <script src="../js/transaction.js"></script>
+    <script src="../js/loading.js"></script>
+</body>
+
+</html>
