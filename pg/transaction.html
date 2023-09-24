@@ -19,17 +19,19 @@
     <main class="centralize">
         <form>
             <div class="formField">
-                <div><label>Transação</label></div>
+                <div><label>Transação *</label></div>
                 <input type="radio" name="type" checked id="expense"> <label for="expense">Despesa</label>
                 <input type="radio" name="type" id="income"> <label for="income">Receita</label>
             </div>
             <div class="formField">
-                <div><label>Data da Transação</label></div>
-                <input type="date">
-        
+                <div><label>Data da Transação *</label></div>
+                <input type="date" id="date">
+
+                <div id="dateRequiredError" class="error">Data é obrigatória / Invalida</div>
+               
             </div>
             <div class="formField">
-                <div><label>Moeda</label></div>
+                <div><label>Moeda *</label></div>
                 <select>
                     <option>Dólar</option>
                     <option>Euro</option>
@@ -37,12 +39,14 @@
                 </select>
             </div>
             <div class="formField">
-                <div><label>Valor</label></div>
-                <input type="number">
-        
+                <div><label>Valor *</label></div>
+                <input type="number" id="value">
+                
+                <div id="valueRequiredError" class="error">Valor é obrigatório!</div>
+                <div id="valueLessOrEqualToZeroError" class="error">Valor deve ser maior que zero</div>
             </div>
             <div class="formField">
-                <div><label>Tipo de Transação</label></div>
+                <div><label>Tipo de Transação *</label></div>
                 <select>
                     <option>-- Selecione um tipo de transação --</option>
                     <option>Acomodação</option>
@@ -57,7 +61,7 @@
                 <input type="text">
         
             </div>
-            <button type="button" class="solid">Salvar</button>
+            <button type="button" class="solid" disabled>Salvar</button>
             <button type="button" class="clear">Cancelar</button>
         </form>
     </main>
