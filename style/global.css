@@ -1,8 +1,21 @@
+:root{
+  --cor0: #F2F2F2;
+  --cor1: #8DAEF2;
+  --cor2: #3F5073;
+  --cor3: #283040;
+  --cor4: #151B26;
+}
+
+label{
+  color: var(--cor0);
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #2dd36f;
+    /*background-color: #2dd36f;*/
+    background: var(--cor2);
 
 
 
@@ -56,7 +69,7 @@ input[type='radio']{
 .solid {
     background-color: white;
     border: none;
-    color: rgb(45, 211, 111);
+    color: var(--cor4);
 }
 
 .outline {
@@ -107,7 +120,7 @@ button.fab.right{
     display: block;
     position: fixed;
     background-color: transparent;
-    border: 12px solid green;
+    border: 12px solid var(--cor1);
     border-radius: 50%;
     border-top: 12px solid transparent;
 
