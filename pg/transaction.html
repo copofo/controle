@@ -33,9 +33,9 @@
             <div class="formField">
                 <div><label>Moeda *</label></div>
                 <select>
-                    <option>Dólar</option>
-                    <option>Euro</option>
-                    <option selected>Real</option>
+                    <option value="USD">Dólar</option>
+                    <option value="EUR">Euro</option>
+                    <option value="BRL" selected>Real</option>
                 </select>
             </div>
             <div class="formField">
@@ -47,21 +47,23 @@
             </div>
             <div class="formField">
                 <div><label>Tipo de Transação *</label></div>
-                <select>
-                    <option>-- Selecione um tipo de transação --</option>
+                <select id="transactionType">
+                    <option value="">-- Selecione um tipo de transação --</option>
                     <option>Acomodação</option>
                     <option>Transporte</option>
                     <option>Alimentação</option>
                     <option>Supermercado</option>
                     <option>Outtros</option>
                 </select>
+
+                <div id="transactionRequiredError" class="error">Tipo de transação é obrigatória!</div>
             </div>
             <div class="formField">
                 <div><label>Descrição</label></div>
                 <input type="text">
         
             </div>
-            <button type="button" class="solid" disabled>Salvar</button>
+            <button type="button" class="solid" disabled id="saveButton">Salvar</button>
             <button type="button" class="clear">Cancelar</button>
         </form>
     </main>
