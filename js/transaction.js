@@ -9,15 +9,51 @@ const f = {
     valueLessOrEqualToZeroError: ()=> d('valueLessOrEqualToZeroError'),
     transactionType: ()=> d('transactionType'),
     transactionRequiredError: ()=> d('transactionRequiredError'),
-    saveButton: ()=> d('saveButton')
+    saveButton: ()=> d('saveButton'),
+    expense: ()=> d('expense'),
+    currency: ()=> d('currency'),
+    description: ()=> d('description')
 }
 
 f.date().addEventListener('change', onChangeDate)
 f.value().addEventListener('change', onchangeValue)
 f.value().addEventListener('input', onchangeValue)
 f.transactionType().addEventListener('change', onChangeTransactionType)
+f.saveButton().addEventListener('click', saveTransaction)
 
+function saveTransaction(){
+    showLoading()
+    const transaction = createTransaction()
 
+    firebase.firestore()
+    .collection('transactions')
+    .add(transaction)
+    .then(()=>{
+        hideLoading()
+        window.location.href = 'home.html'
+    })
+    .catch(()=>{
+        alert("Erro ao salvar transação!")
+    })
+    
+}
+
+function createTransaction(){
+    return {
+
+        type: f.expense().checked ? 'expense' : 'income',
+        date: f.date().value,
+        money: {
+            currency: f.currency().value,
+            value: parseFloat(f.value().value)
+        },
+        transactionType: f.transactionType().value,
+        description: f.description().value,
+        user: {
+            uid: firebase.auth().currentUser.uid
+        }
+    }
+}
 
 function onChangeDate(){
     const date = f.date().value
