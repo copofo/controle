@@ -42,7 +42,10 @@ function findTransactions(user){
             .get()
             .then(snapshot =>{
                 hideLoading()
-                const transaction = snapshot.docs.map(doc => doc.data())
+                const transaction = snapshot.docs.map(doc => ({
+                    ...doc.data(),
+                    uid: doc.id
+                }))
                 addTransactionToScreen(transaction)
             })
             .catch(erro =>{
@@ -55,10 +58,16 @@ function addTransactionToScreen(transaction){
     const orderList = d('transaction')
 
     transaction.forEach(transaction => {
+
+        
         const li = cr('li')
 
         li.classList.add(transaction.type)
 
+        li.addEventListener('dblclick', ()=>{
+            window.location.href = 'transaction.html?uid=' + transaction.uid
+        })
+        
         const date = cr('p')
         date.innerHTML = formatDate(transaction.date)
         li.appendChild(date)
