@@ -4,7 +4,7 @@ header{
 
 main{
     padding: relative;
-    border: solid;
+    
     height: calc(100vh - 60px);
     
 }
