@@ -69,7 +69,7 @@ function addTransactionToScreen(transaction){
         })
         
         const date = cr('p')
-        date.innerHTML = formatDate(transaction.date)
+        date.innerHTML = transaction.date/*formatDate(transaction.date)*/
         li.appendChild(date)
 
         const money = cr('p')
