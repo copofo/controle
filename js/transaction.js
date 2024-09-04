@@ -1,7 +1,8 @@
 const d = (tag) => document.getElementById(tag)
 
+
 const f = {
-    date: () => d("date"),
+    dateIn: () => d("dateIn"),
     dateRequiredError: () => d("dateRequiredError"),
     dateInvalidError: () => d("dateInvalidError"),
     value: () => d('value'),
@@ -16,7 +17,34 @@ const f = {
     description: () => d('description')
 }
 
-f.date().addEventListener('change', onChangeDate)
+
+/* TRATAMETO DE DATA AUTOMATICA */
+
+
+
+
+
+const dataObj = new Date()
+
+const date = f.dateIn()
+
+var getDate = dataObj.getDate()
+
+const dia = String(dataObj.getDate()).padStart(2, '0')
+const mes = String(dataObj.getMonth() + 1).padStart(2, '0')
+const ano = String(dataObj.getFullYear())
+
+const dataAtual = `${dia}/${mes}/${ano}`
+date.value = dataAtual
+
+
+
+/*FIM TRATAMENTO DATA*/
+
+
+
+
+f.dateIn().addEventListener('change', onChangeDate)
 f.value().addEventListener('change', onchangeValue)
 f.value().addEventListener('input', onchangeValue)
 f.transactionType().addEventListener('change', onChangeTransactionType)
@@ -59,7 +87,7 @@ function fillTransactionScreen(transaction){
         f.income().checked = true
     }
 
-    f.date().value = transaction.date
+    f.dateIn().value = transaction.date
     f.currency().value = transaction.money.currency
     f.value().value = transaction.money.value
     f.transactionType().value = transaction.transactionType
@@ -127,7 +155,7 @@ function createTransaction() {
     return {
 
         type: f.expense().checked ? 'expense' : 'income',
-        date: f.date().value,
+        date: f.dateIn().value,
         money: {
             currency: f.currency().value,
             value: parseFloat(f.value().value)
@@ -141,7 +169,7 @@ function createTransaction() {
 }
 
 function onChangeDate() {
-    const date = f.date().value
+    const date = f.dateIn().value
     f.dateRequiredError().style.display = !date ? 'block' : 'none'
 
     toggleSaveButtonDisable()
@@ -170,7 +198,7 @@ function toggleSaveButtonDisable() {
 }
 
 function isFormValid() {
-    const date = f.date().value
+    const date = f.dateIn().value
     if (!date) {
         return false
     }
