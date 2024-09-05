@@ -20,12 +20,12 @@
         <form>
             <div class="formField">
                 <div><label>Transação *</label></div>
-                <input type="radio" name="type" checked id="expense"> <label for="expense">Despesa</label>
-                <input type="radio" name="type" id="income"> <label for="income">Receita</label>
+                <input type="radio" name="type" id="expense"> <label for="expense">Despesa</label>
+                <input type="radio" name="type" checked id="income"> <label for="income">Receita</label>
             </div>
             <div class="formField">
-                <div><label>Data da Transação *</label></div>
-                <input type="text" id="dateIn">
+                <div><label style="display:none;">Data da Transação *</label></div>
+                <input type="text" id="dateIn" style="display:none;">
 
                 <div id="dateRequiredError" class="error">Data é obrigatória / Invalida</div>
                
@@ -33,8 +33,8 @@
             <div class="formField">
                 <div><label>Moeda *</label></div>
                 <select id="currency">
-                    <option value="USD">Dólar</option>
-                    <option value="EUR">Euro</option>
+                   <!-- <option value="USD">Dólar</option>-->
+                    <option value="EUR">VALINHO</option>
                     <option value="BRL" selected>Real</option>
                 </select>
             </div>
@@ -53,7 +53,9 @@
                     <option>Transporte</option>
                     <option>Alimentação</option>
                     <option>Supermercado</option>
-                    <option>Outtros</option>
+                    <option>Outros</option>
+                    <option>COMBUSTIVEL</option>
+                    <option selected >ENTREGA</option>
                 </select>
 
                 <div id="transactionRequiredError" class="error">Tipo de transação é obrigatória!</div>

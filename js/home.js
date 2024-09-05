@@ -1,3 +1,4 @@
+
 const d = (tag)=> document.getElementById(tag)
 const cr = (tag) => document.createElement(tag)
 const f = {
@@ -47,6 +48,7 @@ function findTransactions(user){
                     uid: doc.id
                 }))
                 addTransactionToScreen(transaction)
+                
             })
             .catch(erro =>{
                 console.log(erro)
@@ -58,6 +60,8 @@ function addTransactionToScreen(transaction){
     const orderList = d('transaction')
 
     transaction.forEach(transaction => {
+      
+      
 
         
         const li = cr('li')
@@ -85,10 +89,16 @@ function addTransactionToScreen(transaction){
             description.innerHTML = transaction.description
             li.appendChild(description)
         }
+        
+
 
 
         orderList.appendChild(li)
     });
+    
+    
+    
+    
 }
 
 function formatDate(date){
