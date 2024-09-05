@@ -14,7 +14,9 @@ const f = {
     expense: () => d('expense'),
     income: () => d('income'),
     currency: () => d('currency'),
-    description: () => d('description')
+    description: () => d('description'),
+    btnCancel: () => d('cancel'),
+    sair: ()=> d('logout')
 }
 
 
@@ -49,6 +51,15 @@ f.value().addEventListener('change', onchangeValue)
 f.value().addEventListener('input', onchangeValue)
 f.transactionType().addEventListener('change', onChangeTransactionType)
 f.saveButton().addEventListener('click', saveTransaction)
+
+f.btnCancel().addEventListener('click', () =>{
+  window.location.href='home.html'
+})
+
+f.sair().addEventListener('click', ()=>{
+  window.location.href='home.html'
+})
+
 
 if (!isNewTransaction()) {
     const uid = getTransactionUid()
