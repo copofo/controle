@@ -73,7 +73,7 @@ function addTransactionToScreen(transaction){
         })
         
         const date = cr('p')
-        date.innerHTML = transaction.date/*formatDate(transaction.date)*/
+        date.innerHTML = "DATA: "+transaction.date/*formatDate(transaction.date)*/
         li.appendChild(date)
 
         const money = cr('p')
@@ -81,12 +81,12 @@ function addTransactionToScreen(transaction){
         li.appendChild(money)
 
         const type = cr('p')
-        type.innerHTML = transaction.transactionType
+        type.innerHTML = "ORIGEM: "+transaction.transactionType
         li.appendChild(type)
 
         if(transaction.description){
             const description = cr('p')
-            description.innerHTML = transaction.description
+            description.innerHTML ="DESCRIÇÃO/RECEBEDOR: "+ transaction.description
             li.appendChild(description)
         }
         
@@ -106,5 +106,5 @@ function formatDate(date){
 }
 
 function formatMoney(money){
-    return `${money.currency} ${money.value.toFixed(2)}`
+    return `${money.currency}: $${money.value.toFixed(2)}`
 }
