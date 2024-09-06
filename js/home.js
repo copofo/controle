@@ -7,6 +7,7 @@ const f = {
 }
 
 
+
 f.btnNewTransaction().addEventListener('click', newTransaction)
 
 firebase.auth().onAuthStateChanged(user =>{
@@ -66,7 +67,7 @@ function addTransactionToScreen(transaction){
         
         const li = cr('li')
 
-        li.classList.add(transaction.type)
+        li.classList.add(transaction.type, "li-get")
 
         li.addEventListener('dblclick', ()=>{
             window.location.href = 'transaction.html?uid=' + transaction.uid
@@ -108,3 +109,62 @@ function formatDate(date){
 function formatMoney(money){
     return `${money.currency}: $${money.value.toFixed(2)}`
 }
+
+
+
+
+
+/* Buscando */
+
+var input = document.getElementById('buscar')
+var dadosList = document.getElementById('transaction')
+
+
+buscar.addEventListener('keyup', ()=>{
+    
+    let exp = buscar.value.toLowerCase()
+    
+    
+    
+    
+    if(exp.length === 1){
+      
+        return;
+      
+    }
+  
+  
+    
+    let pes = dadosList.getElementsByClassName('li-get')
+    
+    
+    
+    for(let pos in pes){
+      
+      if(true === isNaN(pos)){
+        
+        continue;
+        
+      }
+      
+      let conteudoPes = pes[pos].innerHTML.toLowerCase();
+      
+      if(true === conteudoPes.includes(exp)){
+        
+        pes[pos].style.display = "";
+        
+        
+      } else{
+        
+        
+        pes[pos].style.display = "none"
+      }
+      
+      
+    }
+    
+    
+  })
+  
+  
+  /* Fim Buscando */
