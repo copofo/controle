@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const resumoFinance = document.getElementById('resumoFinance')
 
-        resumoFinance.innerHTML = `(-- Resumo Financeiro -- Receitas: ${formatCurrency(incomeSum)}  // Despesas: ${formatCurrency(expenseSum)}  //  Lucro Líquido = ${formatCurrency(incomeSum)-formatCurrency(expenseSum)})`
+        resumoFinance.innerHTML = `(-- Resumo Financeiro -- Receitas: ${formatCurrency(incomeSum)}  // Despesas: ${formatCurrency(expenseSum)}  //  Lucro Líquido = ${formatCurrency(formatCurrency(incomeSum)-formatCurrency(expenseSum))})`
 
       });
 });
