@@ -8,6 +8,7 @@ body{
 ol{
     list-style-type: none;
     padding: 0;
+    
 }
 
 ol li{
@@ -15,6 +16,12 @@ ol li{
     background-color: white;
     padding: 8px 16px;
     border-bottom: 1px solid gray;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+#buscar{
+    margin: 10px;
 }
 
 ol li:hover{
