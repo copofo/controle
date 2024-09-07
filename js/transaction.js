@@ -20,7 +20,7 @@ const f = {
     btnRemove: ()=> d('btnRemove')
 }
 
-f.btnRemove().style.display = 'none'
+
 
 
 /* TRATAMETO DE DATA AUTOMATICA */
