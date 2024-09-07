@@ -168,3 +168,110 @@ buscar.addEventListener('keyup', ()=>{
   
   
   /* Fim Buscando */
+
+
+  /* Estudando --------------------------------------------------------------------------
+
+  document.addEventListener('DOMContentLoaded', () => {
+    firebase.firestore()
+      .collection('transactions')
+      .orderBy('date')
+      .onSnapshot(function (documentos) {
+        // Inicializa a soma total
+        let totalSum = 0;
+
+        // Itera sobre as mudanças nos documentos
+        documentos.docChanges().forEach(function (changes) {
+          // Obtém o documento
+          const doc = changes.doc;
+          
+          // Obtém os dados do documento
+          const dados = doc.data();
+
+          console.log(dados)
+
+
+          // Verifica se o dado tem a propriedade 'money' e se é um objeto
+          if (dados.money && typeof dados.money === 'object') {
+            // Verifica se 'money.value' é um número
+            if (typeof dados.money.value === 'number') {
+              // Adiciona o valor ao total
+              totalSum += dados.money.value;
+            } else {
+              console.warn('O valor de money.value não é um número:', dados.money.value);
+            }
+          } else {
+            console.warn('O dado não tem a propriedade money ou money não é um objeto:', dados);
+          }
+        });
+
+        // Exibe o total acumulado
+        console.log('Total Sum:', totalSum);
+        var span = document.getElementById('spanTotalValor')
+        span.innerHTML = totalSum
+
+
+        
+
+      });
+});
+*/
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    firebase.firestore()
+      .collection('transactions')
+      .orderBy('date')
+      .onSnapshot(function (documentos) {
+        // Inicializa as somas totais
+        let totalSum = 0;
+        let incomeSum = 0;
+        let expenseSum = 0;
+
+        // Itera sobre as mudanças nos documentos
+        documentos.docChanges().forEach(function (changes) {
+          // Obtém o documento
+          const doc = changes.doc;
+          
+          // Obtém os dados do documento
+          const dados = doc.data();
+
+          // Verifica se o dado tem a propriedade 'money' e se é um objeto
+          if (dados.money && typeof dados.money === 'object') {
+            // Verifica se 'money.value' é um número
+            if (typeof dados.money.value === 'number') {
+              // Adiciona o valor ao total
+              totalSum += dados.money.value;
+
+              // Verifica o tipo e acumula o valor correspondente
+              if (dados.type === 'income') {
+                incomeSum += dados.money.value;
+              } else if (dados.type === 'expense') {
+                expenseSum += dados.money.value;
+              } else {
+                console.warn('O tipo não é nem "income" nem "expense":', dados.type);
+              }
+            } else {
+              console.warn('O valor de money.value não é um número:', dados.money.value);
+            }
+          } else {
+            console.warn('O dado não tem a propriedade money ou money não é um objeto:', dados);
+          }
+        });
+
+        // Função para formatar os valores com duas casas decimais
+        function formatCurrency(value) {
+          return value.toFixed(2);
+        }
+
+        // Exibe os totais acumulados formatados
+        console.log('Total Sum:', formatCurrency(totalSum));
+        console.log('Total Income:', formatCurrency(incomeSum));
+        console.log('Total Expense:', formatCurrency(expenseSum));
+
+        const resumoFinance = document.getElementById('resumoFinance')
+
+        resumoFinance.innerHTML = `(-- Resumo Financeiro -- Receitas: ${formatCurrency(incomeSum)}  // Despesas: ${formatCurrency(expenseSum)}  //  Lucro Líquido = ${formatCurrency(incomeSum)-formatCurrency(expenseSum)})`
+
+      });
+});
