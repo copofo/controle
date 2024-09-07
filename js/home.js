@@ -82,7 +82,7 @@ function addTransactionToScreen(transaction){
         li.appendChild(money)
 
         const type = cr('p')
-        type.innerHTML = "ORIGEM: "+transaction.transactionType
+        type.innerHTML = "ORIGEM/DESTINO: "+transaction.transactionType
         li.appendChild(type)
 
         if(transaction.description){

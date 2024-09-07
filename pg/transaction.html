@@ -41,6 +41,7 @@
                 <select id="currency">
                    <!-- <option value="USD">Dólar</option>-->
                     <option value="VALE">VALINHO</option>
+                    <option value="CARTÃO">CARTÃO</option>
                     <option value="DINHEIRO" selected >DINHEIRO</option>
                 </select>
             </div>
@@ -52,15 +53,17 @@
                 <div id="valueLessOrEqualToZeroError" class="error">Valor deve ser maior que zero</div>
             </div>
             <div class="formField">
-                <div><label>Tipo de Transação *</label></div>
+                <div><label>Origem ou Destino do valor *</label></div>
                 <select id="transactionType">
                     <option value="">-- Selecione um tipo de transação --</option>
-                    <option>Acomodação</option>
-                    <option>Transporte</option>
-                    <option>Alimentação</option>
-                    <option>Supermercado</option>
-                    <option>Outros</option>
+                    <option>PGTO SEMANAL CENTRAL</option>
+                    <option>ALIMENTAÇÃO</option>
                     <option>COMBUSTIVEL</option>
+                    <option>RESERVA DE MANUTENÇÃO</option>
+                    <option>MANUTENÇÃO</option>
+                    <option>ENTREGA</option>
+                    <option>OUTROS</option>
+                    
                     <option selected >ENTREGA</option>
                 </select>
 
