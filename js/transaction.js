@@ -223,3 +223,40 @@ function isFormValid() {
     }
     return true
 }
+
+
+
+function removeTransaction(transaction) {
+
+
+    showLoading()
+
+    firebase.firestore()
+      .collection('transactions')
+      .doc(getTransactionUid())
+      .delete()
+      .then(() => {
+
+        hideLoading()
+        window.location.href = 'home.html'
+
+      })
+      .catch(() => {
+
+        hideLoading()
+        alert("Erro ao atualizar operação")
+
+      })
+
+
+}
+
+
+function AskRemoveTransaction (transaction){
+    const shouldRemove = confirm("Os dados serão excluídos definitivamento deseja confirmar?")
+    if(shouldRemove){
+        removeTransaction(transaction)
+    }
+
+    console.log(shouldRemove)
+}
