@@ -16,8 +16,11 @@ const f = {
     currency: () => d('currency'),
     description: () => d('description'),
     btnCancel: () => d('cancel'),
-    sair: ()=> d('logout')
+    sair: ()=> d('logout'),
+    btnRemove: ()=> d('btnRemove')
 }
+
+f.btnRemove().style.display = 'none'
 
 
 /* TRATAMETO DE DATA AUTOMATICA */
@@ -64,6 +67,7 @@ f.sair().addEventListener('click', ()=>{
 if (!isNewTransaction()) {
     const uid = getTransactionUid()
     findTransactionByUid(uid)
+    
 }
 
 function findTransactionByUid(uid) {
@@ -106,6 +110,8 @@ function fillTransactionScreen(transaction){
     if(transaction.description){
         f.description().value = transaction.description
     }
+
+    f.btnRemove().style.display = 'flex'
 }   
 
 
@@ -148,6 +154,7 @@ function save(transaction){
 }
 
 function update(transaction){
+    f.re
     showLoading()
     firebase.firestore()
     .collection("transactions")
