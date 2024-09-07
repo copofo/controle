@@ -170,52 +170,7 @@ buscar.addEventListener('keyup', ()=>{
   /* Fim Buscando */
 
 
-  /* Estudando --------------------------------------------------------------------------
 
-  document.addEventListener('DOMContentLoaded', () => {
-    firebase.firestore()
-      .collection('transactions')
-      .orderBy('date')
-      .onSnapshot(function (documentos) {
-        // Inicializa a soma total
-        let totalSum = 0;
-
-        // Itera sobre as mudanças nos documentos
-        documentos.docChanges().forEach(function (changes) {
-          // Obtém o documento
-          const doc = changes.doc;
-          
-          // Obtém os dados do documento
-          const dados = doc.data();
-
-          console.log(dados)
-
-
-          // Verifica se o dado tem a propriedade 'money' e se é um objeto
-          if (dados.money && typeof dados.money === 'object') {
-            // Verifica se 'money.value' é um número
-            if (typeof dados.money.value === 'number') {
-              // Adiciona o valor ao total
-              totalSum += dados.money.value;
-            } else {
-              console.warn('O valor de money.value não é um número:', dados.money.value);
-            }
-          } else {
-            console.warn('O dado não tem a propriedade money ou money não é um objeto:', dados);
-          }
-        });
-
-        // Exibe o total acumulado
-        console.log('Total Sum:', totalSum);
-        var span = document.getElementById('spanTotalValor')
-        span.innerHTML = totalSum
-
-
-        
-
-      });
-});
-*/
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -275,3 +230,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
       });
 });
+
+/*
+
+document.addEventListener('DOMContentLoaded', () => {
+    firebase.firestore()
+      .collection('transactions')
+      .orderBy('date')
+      .onSnapshot(function (documentos) {
+        
+        var totalSum = 0;
+        var incomeSum = 0;
+        var expenseSum = 0;
+        
+        
+  
+        documentos.docChanges().forEach(function (changes) {
+          
+          var intervalID
+          
+          const doc = changes.doc
+  
+            const dados = {
+  
+              ...doc.data(), uid: doc.id
+  
+            }
+
+            function formatCurrency(value) {
+                return value.toFixed(2);
+            }
+          
+          
+            totalSum += dados.money.value;
+            
+            if(dados.type == 'income'){
+                incomeSum += dados.money.value
+            }
+            
+            if(dados.type == "expense"){
+                expenseSum += dados.money.value
+            }
+            //console.log(formatCurrency(totalSum))
+  
+            
+            const resumoFinance = document.getElementById('resumoFinance')
+
+            resumoFinance.innerHTML = formatCurrency(totalSum) + "-------" + formatCurrency(incomeSum)+ "-----------" + formatCurrency(expenseSum)
+        })
+
+
+        
+      })
+  })
+  
+  */

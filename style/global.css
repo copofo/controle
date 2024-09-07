@@ -134,3 +134,12 @@ button.fab.right{
         transform: rotate(360deg);
     }
 }
+
+
+
+#resumoFinance{
+    color: var(--cor4); 
+    text-align: center; 
+    background: var(--cor1); 
+    font-weight: bolder;
+}
