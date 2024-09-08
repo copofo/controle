@@ -260,7 +260,7 @@ function removeTransaction(transaction) {
 
 
 function AskRemoveTransaction (transaction){
-    const shouldRemove = confirm("Os dados serão excluídos definitivamento deseja confirmar?")
+    const shouldRemove = confirm("Os dados serão excluídos definitivamente deseja confirmar?")
     if(shouldRemove){
         removeTransaction(transaction)
     }
