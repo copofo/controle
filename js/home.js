@@ -237,6 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
         despesas.style.color = 'red'
         receitas.style.color = 'blue'
         lucro.style.color = 'green'
+        
+        despesas.innerHTML += " - " +formatCurrency(expenseSum)
+        receitas.innerHTML += " " +formatCurrency(incomeSum)
+        lucro.innerHTML += " = "+formatCurrency(incomeSum-expenseSum)
 
       
 
