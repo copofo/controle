@@ -64,7 +64,7 @@ function addTransactionToScreen(transactions) {
         });
         
         const date = cr('p');
-        date.innerHTML = "DATA: " + formatDate(transaction.date);
+        date.innerHTML = "DATA: "+transaction.date
         li.appendChild(date);
 
         const money = cr('p');
