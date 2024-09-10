@@ -1,3 +1,163 @@
+const d = (tag) => document.getElementById(tag);
+const cr = (tag) => document.createElement(tag);
+
+const f = {
+    logout: () => d('logout'),
+    btnNewTransaction: () => d('btnNewTransaction')
+};
+
+f.btnNewTransaction().addEventListener('click', newTransaction);
+
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        findTransactions(user);
+    }
+});
+
+function newTransaction() {
+    window.location.href = 'transaction.html';
+}
+
+f.logout().addEventListener('click', logout);
+
+function logout() {
+    firebase.auth().signOut()
+    .then(() => {
+        window.location.href = '../index.html';
+    })
+    .catch(() => {
+        alert("Erro ao fazer logout!");
+    });
+}
+
+function findTransactions(user) {
+    showLoading();
+    firebase.firestore()
+        .collection('transactions')
+        .where('user.uid', '==', user.uid)
+        .orderBy('date', 'desc')
+        .get()
+        .then(snapshot => {
+            hideLoading();
+            const transactions = snapshot.docs.map(doc => ({
+                ...doc.data(),
+                uid: doc.id
+            }));
+            addTransactionToScreen(transactions);
+            calculateAndDisplaySummary(transactions);
+        })
+        .catch(erro => {
+            console.log(erro);
+            alert('Erro ao recuperar transações!');
+        });
+}
+
+function addTransactionToScreen(transactions) {
+    const orderList = d('transaction');
+    orderList.innerHTML = ''; // Clear the list before adding new transactions
+
+    transactions.forEach(transaction => {
+        const li = cr('li');
+        li.classList.add(transaction.type, "li-get");
+        li.addEventListener('dblclick', () => {
+            window.location.href = 'transaction.html?uid=' + transaction.uid;
+        });
+        
+        const date = cr('p');
+        date.innerHTML = "DATA: " + formatDate(transaction.date);
+        li.appendChild(date);
+
+        const money = cr('p');
+        money.innerHTML = formatMoney(transaction.money);
+        li.appendChild(money);
+
+        const type = cr('p');
+        type.innerHTML = "ORIGEM/DESTINO: " + transaction.transactionType;
+        li.appendChild(type);
+
+        if (transaction.description) {
+            const description = cr('p');
+            description.innerHTML = "DESCRIÇÃO/RECEBEDOR: " + transaction.description;
+            li.appendChild(description);
+        }
+
+        orderList.appendChild(li);
+    });
+}
+
+function formatDate(date) {
+    return new Date(date).toLocaleDateString('pt-br');
+}
+
+function formatMoney(money) {
+    return `${money.currency}: $${money.value.toFixed(2)}`;
+}
+
+function calculateAndDisplaySummary(transactions) {
+    let totalSum = 0;
+    let incomeSum = 0;
+    let expenseSum = 0;
+
+    transactions.forEach(transaction => {
+        if (transaction.money && typeof transaction.money === 'object') {
+            if (typeof transaction.money.value === 'number') {
+                totalSum += transaction.money.value;
+
+                if (transaction.type === 'income') {
+                    incomeSum += transaction.money.value;
+                } else if (transaction.type === 'expense') {
+                    expenseSum += transaction.money.value;
+                } else {
+                    console.warn('O tipo não é nem "income" nem "expense":', transaction.type);
+                }
+            } else {
+                console.warn('O valor de money.value não é um número:', transaction.money.value);
+            }
+        } else {
+            console.warn('O dado não tem a propriedade money ou money não é um objeto:', transaction);
+        }
+    });
+
+    const resumoFinance = d('resumoFinance');
+    const despesas = d('despesas');
+    const receitas = d('receitas');
+    const lucro = d('lucro');
+
+    despesas.style.color = 'red';
+    receitas.style.color = 'blue';
+    lucro.style.color = 'green';
+    
+    despesas.innerHTML = "Despesas: " + formatMoney({ value: expenseSum, currency: "USD" });
+    receitas.innerHTML = "Receitas: " + formatMoney({ value: incomeSum, currency: "USD" });
+    lucro.innerHTML = "Lucro: " + formatMoney({ value: incomeSum - expenseSum, currency: "USD" });
+}
+
+/* Função de busca */
+
+const buscar = d('buscar');
+const dadosList = d('transaction');
+
+buscar.addEventListener('keyup', () => {
+    const exp = buscar.value.toLowerCase();
+
+    if (exp.length === 1) {
+        return;
+    }
+
+    const pes = dadosList.getElementsByClassName('li-get');
+
+    Array.from(pes).forEach(item => {
+        const conteudoPes = item.innerHTML.toLowerCase();
+        item.style.display = conteudoPes.includes(exp) ? "" : "none";
+    });
+});
+
+
+
+/*
+
+
+
 
 const d = (tag)=> document.getElementById(tag)
 const cr = (tag) => document.createElement(tag)
@@ -75,6 +235,8 @@ function addTransactionToScreen(transaction){
         
         const date = cr('p')
         date.innerHTML = "DATA: "+transaction.date/*formatDate(transaction.date)*/
+        
+  /*
         li.appendChild(date)
 
         const money = cr('p')
@@ -115,7 +277,7 @@ function formatMoney(money){
 
 
 /* Buscando */
-
+/*
 var input = document.getElementById('buscar')
 var dadosList = document.getElementById('transaction')
 
@@ -171,7 +333,7 @@ buscar.addEventListener('keyup', ()=>{
 
 
 
-
+/*
 
 document.addEventListener('DOMContentLoaded', () => {
     firebase.firestore()
@@ -301,3 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   
   */
+  
+  
+  
+  
