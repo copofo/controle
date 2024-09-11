@@ -26,6 +26,7 @@ ol li{
     border-bottom: 1px solid gray;
     margin: 10px;
     border-radius: 5px;
+    border: 2px solid black;
 }
 
 #buscar{

@@ -90,7 +90,10 @@ button.fab{
     border-radius: 50%;
     border: none;
     font-size: 24px;
-    box-shadow: 2px 2px 2px gray;
+    box-shadow: 0px 0px 3px 0px black;
+    color: white;
+    
+    background-image: linear-gradient(to top, var(--cor4),var(--cor3),var(--cor2),var(--cor1));
 }
 
 button.fab.fixed{
