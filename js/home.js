@@ -247,3 +247,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Controle do menu hambúrguer
+const menuHamburguer = d('menuHamburguer');
+const menu = d('menu');
+
+// Evento para alternar a exibição do menu
+menuHamburguer.addEventListener('click', () => {
+    menu.classList.toggle('open'); // Adiciona ou remove a classe 'open' para mostrar/ocultar o menu
+});
+
+// Fecha o menu ao clicar fora dele
+document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target) && !menuHamburguer.contains(event.target)) {
+        menu.classList.remove('open'); // Fecha o menu se o clique for fora do menu ou do ícone de hambúrguer
+    }
+});

@@ -7,63 +7,77 @@
     <title>Home</title>
     <link rel="stylesheet" href="../style/global.css">
     <link rel="stylesheet" href="../style/home.css">
-
-    
 </head>
 
 <body style="display: none;">
+    <!-- Cabeçalho com Ícone do Menu Hambúrguer -->
     <header>
-        <button class="clear" id="logout">Sair</button>
-        
-        <button id="showAll" class="clear">Mostrar Todas as Transações</button>
-
+        <div id="menuHamburguer" class="hamburger-menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
     </header>
-    
+
+    <!-- Menu que será mostrado ao clicar no ícone -->
+    <nav id="menu" class="menu">
+        <ul>
+            <li><button class="clear" id="logout">Sair</button></li>
+            <li><button id="showAll" class="clear">Mostrar Todas as Transações</button></li>
+            <li>
+                <label for="datePicker" style="margin: 10px;">Escolha um dia específico</label>
+                <input type="date" id="datePicker" placeholder="Escolha um dia específico" />
+            </li>
+            <li>
+                <label for="monthPicker" style="margin: 10px;">Escolha um mês inteiro para ver o resumo</label>
+                <input type="month" id="monthPicker" />
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Resumo Financeiro -->
     <div id="resumoFinance">
         <span id="receitas">Receitas: </span>
         <span id="despesas">Despesas: </span>
         <span id="lucro">Lucro: </span>
     </div>
-    <label style="margin: 10px;">Escolha um dia específico</label>
-    
-    
-<input type="date" id="datePicker" placeholder="Escolha um dia específico"/>
 
-<label style="margin: 10px;">Escolha um mes inteiro para ver o resumo</label>
-<input type="month" id="monthPicker" placeholder="Escolha um mes para ver o resumo"/>
+    <!-- Lista de Transações -->
+    <ol id="transaction"></ol>
 
-<!--
-  <input
-  
-  type="search"
-  id="buscar"
-  
-  placeholder="Buscar"
-  
-
-  
-  
-  />
-  -->
-
-    <ol id="transaction">
-       
-    </ol>
-
+    <!-- Botão para adicionar nova transação -->
     <button class="fab fixed bottom right" id="btnNewTransaction">+</button>
 
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app-compat.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth-compat.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-firestore-compat.js"></script>
 
+    <!-- Scripts -->
     <script src="../js/init.js"></script>
     <script src="../js/guard.js"></script>
-
-
     <script src="../js/home.js"></script>
     <script src="../js/loading.js"></script>
+
+    <!-- Script para controle do menu hambúrguer -->
+    <script>
+        // Referência para o menu e o ícone de hambúrguer
+        const d = (tag) => document.getElementById(tag);
+        const menuHamburguer = d('menuHamburguer');
+        const menu = d('menu');
+
+        // Evento para alternar a exibição do menu
+        menuHamburguer.addEventListener('click', () => {
+            menu.classList.toggle('open'); // Adiciona ou remove a classe 'open' para mostrar/ocultar o menu
+        });
+
+        // Fecha o menu ao clicar fora dele
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target) && !menuHamburguer.contains(event.target)) {
+                menu.classList.remove('open'); // Fecha o menu se o clique for fora do menu ou do ícone de hambúrguer
+            }
+        });
+    </script>
 </body>
 
 </html>
