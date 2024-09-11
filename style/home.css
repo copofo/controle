@@ -74,7 +74,7 @@ p{
   margin: 10px;
 }
 
-#logout #datePicker{
+#logout, #datePicker, #monthPicker{
   margin: 10px;
 }
 

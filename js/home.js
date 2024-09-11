@@ -16,10 +16,15 @@ f.logout().addEventListener('click', logout);
 const datePicker = d('datePicker');
 datePicker.addEventListener('change', handleDateChange);
 
+// Adiciona um evento ao seletor de mês
+const monthPicker = d('monthPicker');
+monthPicker.addEventListener('change', handleMonthChange);
+
 // Adiciona um evento ao botão para mostrar todas as transações
 const showAllButton = d('showAll');
 showAllButton.addEventListener('click', () => {
     datePicker.value = ''; // Limpa a data para mostrar todas as transações
+    monthPicker.value = ''; // Limpa o mês selecionado para mostrar todas as transações
     handleDateChange(); // Chama a função de alteração de data para mostrar todas as transações
 });
 
@@ -36,6 +41,30 @@ function handleDateChange() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             findTransactions(user, isShowingAll ? null : selectedDate); // Passa null para buscar todas as transações
+        }
+    });
+}
+
+// Função auxiliar para pegar o intervalo do mês
+function getMonthRange(month) {
+    const [year, monthNum] = month.split('-');
+    const firstDay = new Date(year, monthNum - 1, 1).toISOString().slice(0, 10); // Primeiro dia do mês
+    const lastDay = new Date(year, monthNum, 0).toISOString().slice(0, 10); // Último dia do mês
+    return { firstDay, lastDay };
+}
+
+// Função para lidar com mudanças no mês selecionado
+function handleMonthChange() {
+    const selectedMonth = monthPicker.value;
+    if (!selectedMonth) return;
+
+    const { firstDay, lastDay } = getMonthRange(selectedMonth);
+    const formattedFirstDay = formatDateForFirestore(firstDay);
+    const formattedLastDay = formatDateForFirestore(lastDay);
+
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            findTransactionsForMonth(user, formattedFirstDay, formattedLastDay);
         }
     });
 }
@@ -81,6 +110,33 @@ function findTransactions(user, date) {
         .catch(error => {
             hideLoading(); // Assegura que o carregamento seja escondido em caso de erro
             console.log('Error retrieving transactions:', error); // Diagnóstico
+            alert('Erro ao recuperar transações!');
+        });
+}
+
+// Função para buscar transações por um mês específico
+function findTransactionsForMonth(user, startDate, endDate) {
+    showLoading();
+    let query = firebase.firestore().collection('transactions')
+        .where('user.uid', '==', user.uid)
+        .where('date', '>=', startDate)
+        .where('date', '<=', endDate)
+        .orderBy('date', 'desc');
+
+    query.get()
+        .then(snapshot => {
+            hideLoading();
+            const transactions = snapshot.docs.map(doc => ({
+                ...doc.data(),
+                uid: doc.id
+            }));
+
+            addTransactionToScreen(transactions);
+            calculateAndDisplaySummary(transactions);
+        })
+        .catch(error => {
+            hideLoading();
+            console.log('Error retrieving transactions:', error);
             alert('Erro ao recuperar transações!');
         });
 }
