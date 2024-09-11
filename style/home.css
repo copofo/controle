@@ -58,3 +58,28 @@ p{
 #lucro{
     border: solid;
 }
+
+#showAll{
+  border: solid;
+  left: 0;
+}
+
+#logout{
+  border: solid;
+  right: 0;
+  
+}
+
+#datePicker{
+  margin: 10px;
+}
+
+#logout #datePicker{
+  margin: 10px;
+}
+
+header{
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+}
