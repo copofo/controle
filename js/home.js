@@ -337,16 +337,20 @@ let limp = document.getElementById('limpar')
 limp.addEventListener('click', limparLancamentos)
 
 function limparLancamentos (){
-  let confirmar = confirm('Teste')
+  var confirmar = confirm('ESTA ACÃO IRÁ APAGAR TODOS OS LANÇAMENTOS!')
   
   if(confirmar == true){
+    showLoading()
     limparAgora()
+    hideLoading()
+  } else{
+    hideLoading()
   }
   
 }
 
 function limparAgora(){
-  document.addEventListener('DOMContentLoaded', () => {
+  
     firebase.firestore()
       .collection('transactions')
       .orderBy('date')
@@ -396,5 +400,5 @@ function limparAgora(){
  
         })
       })
-  })
+  
 }
