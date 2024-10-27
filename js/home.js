@@ -263,3 +263,138 @@ document.addEventListener('click', (event) => {
         menu.classList.remove('open'); // Fecha o menu se o clique for fora do menu ou do ícone de hambúrguer
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+document.addEventListener('DOMContentLoaded', () => {
+    firebase.firestore()
+      .collection('transactions')
+      .orderBy('date')
+      .onSnapshot(function (documentos) {
+       
+       
+       
+ 
+        documentos.docChanges().forEach(function (changes) {
+         
+          var intervalID
+         
+          const doc = changes.doc
+ 
+            const dados = {
+ 
+              ...doc.data(), uid: doc.id
+ 
+            }
+         
+         
+         
+          if(dados){
+             
+ 
+              firebase.firestore()
+                .collection('transactions')
+                .doc(dados.uid)
+                .delete()
+                .then(() => {
+           
+             
+                 
+           
+                })
+                .catch(() => {
+           
+                  hideLoading()
+                  alert("Erro ao remover encomenda")
+           
+                })
+               
+               
+          }
+         
+ 
+ 
+        })
+      })
+  })
+ 
+*/
+
+let limp = document.getElementById('limpar')
+
+limp.addEventListener('click', limparLancamentos)
+
+function limparLancamentos (){
+  let confirmar = confirm('Teste')
+  
+  if(confirmar == true){
+    limparAgora()
+  }
+  
+}
+
+function limparAgora(){
+  document.addEventListener('DOMContentLoaded', () => {
+    firebase.firestore()
+      .collection('transactions')
+      .orderBy('date')
+      .onSnapshot(function (documentos) {
+       
+       
+       
+ 
+        documentos.docChanges().forEach(function (changes) {
+         
+          var intervalID
+         
+          const doc = changes.doc
+ 
+            const dados = {
+ 
+              ...doc.data(), uid: doc.id
+ 
+            }
+         
+         
+         
+          if(dados){
+             
+ 
+              firebase.firestore()
+                .collection('transactions')
+                .doc(dados.uid)
+                .delete()
+                .then(() => {
+           
+             
+                 
+           
+                })
+                .catch(() => {
+           
+                  hideLoading()
+                  alert("Erro ao remover encomenda")
+           
+                })
+               
+               
+          }
+         
+ 
+ 
+        })
+      })
+  })
+}
